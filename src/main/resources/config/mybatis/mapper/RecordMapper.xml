@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mrjoke.seckill.dao.RecordDao">
+    <insert id="insertRecord">
+        INSERT IGNORE INTO
+            tb_record(seckill_id,record_phone,record_status,record_seckill_time)
+        VALUES
+            (#{seckillId},#{recordPhone},0,now())
+    </insert>
+    <select id="selectByIdWithSeckill" resultType="Record">
+        SELECT
+            r.seckill_id,
+            r.record_phone,
+            r.record_seckill_count,
+            r.record_seckill_time,
+            s.seckill_id as "seckill.seckill_id",
+            s.seckill_name as "seckill.seckill_name",
+            s.seckill_quantity as "seckill.seckill_quantity",
+            s.seckill_start_time as "seckill.seckill_start_time",
+            s.seckill_end_time as "seckill.seckill_end_time",
+            s.seckill_create_time as "seckill.seckill_create_time"
+        FROM tb_record as r
+        INNER JOIN tb_seckill as s
+        ON r.seckill_id = s.seckill_id
+        WHERE r.seckill_id = #{seckillId}
+        AND r.record_phone = #{recordPhone}
+    </select>
+</mapper>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mrjoke.seckill.dao.SeckillDao">
+    <select id="selectById" parameterType="int" resultType="Seckill">
+        SELECT
+            seckill_id,
+            seckill_name,
+            seckill_quantity,
+            seckill_start_time,
+            seckill_end_time,
+            seckill_create_time
+        FROM
+            tb_seckill
+        WHERE seckill_id = #{seckillId}
+    </select>
+    <select id="selectAll" resultType="Seckill">
+        SELECT
+            seckill_id,
+            seckill_name,
+            seckill_quantity,
+            seckill_start_time,
+            seckill_end_time,
+            seckill_create_time
+        FROM
+            tb_seckill
+        ORDER BY
+            seckill_create_time DESC
+        LIMIT #{offset},#{limit}
+    </select>
+    <update id="reduceQuantity">
+        UPDATE
+            tb_seckill
+        SET
+            seckill_quantity = seckill_quantity - 1
+        WHERE seckill_id = #{seckillId}
+        AND seckill_quantity > 0
+        AND seckill_start_time <![CDATA[ <= ]]> #{killTime}
+        And seckill_end_time >= #{killTime}
+    </update>
+</mapper>
