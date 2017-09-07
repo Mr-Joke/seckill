@@ -20,6 +20,7 @@
         <fileset id="fileset" name="Spring Context" removed="false">
           <file>file://$MODULE_DIR$/src/main/resources/config/spring/spring-dao.xml</file>
           <file>file://$MODULE_DIR$/src/main/resources/config/spring/spring-service.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/config/spring/spring-web.xml</file>
         </fileset>
       </configuration>
     </facet>

@@ -74,4 +74,30 @@ public class SeckillServiceTest {
         logger.info(seckillExecution);
     }
 
+    @Test
+    public void seckill(){
+        /*
+        * 2017-09-07 09:15:07 INFO
+        * SeckillServiceTest:86 -
+        * SeckillExecution{seckillId=2, state=0, stateInfo='秒杀成功',
+        * record=Record{seckillId=2, recordPhone='13544494187', recordSeckillCount=1, recordSeckillTime=Thu Sep 07 09:15:07 CST 2017,
+        * seckill=Seckill{seckillId=2, seckillName='1000元秒iPad', seckillQuantity=199, seckillStartTime=Thu Sep 07 00:00:00 CST 2017, seckillEndTime=Fri Sep 08 00:00:00 CST 2017, seckillCreateTime=Tue Sep 05 00:00:00 CST 2017}}}
+        * */
+        int seckillId = 2;
+        Exposer exposer = seckillService.exposeSeckillUrl(seckillId);
+        logger.info(exposer);
+        try {
+            if (exposer.isExposed()){
+                String phone = "13544494187";
+                SeckillExecution seckillExecution = seckillService.executeSeckill(seckillId, phone, exposer.getMd5());
+                logger.info(seckillExecution);
+            }else{
+                logger.info("秒杀尚未开始");
+            }
+        }catch (Exception e){
+            logger.error(e);
+        }
+
+    }
+
 }

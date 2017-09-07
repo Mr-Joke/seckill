@@ -123,7 +123,8 @@ public class SeckillServiceImpl implements SeckillService {
             }else{
                 //记录购买行为
                 int affectRecord = recordDao.insertRecord(seckillId, userPhone);
-                if (affectCount <= 0){
+                logger.info("affectCount : " + affectCount);
+                if (affectRecord <= 0){
                     throw new RepeatSeckillException("repeated killing !!!");
                 }else{
                     //秒杀成功，返回携带秒杀商品的信息
@@ -131,10 +132,8 @@ public class SeckillServiceImpl implements SeckillService {
                     return new SeckillExecution(seckillId, SeckillStateEnum.SUCCESS,record);
                 }
             }
-        } catch (SeckillCloseException e1){
+        } catch (SeckillCloseException | RepeatSeckillException e1){
             throw e1;
-        } catch (RepeatSeckillException e2){
-            throw e2;
         } catch (Exception e){
             logger.error(e.getMessage(),e);
             //将所有编译器异常转换成运行期异常

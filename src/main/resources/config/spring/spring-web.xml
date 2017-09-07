@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+    <!-- 1.开启注解驱动
+        简化配置：
+        1）自动注册DefaultAnnotationHandlerMapping和AnnotationMethodHandlerAdapter等默认配置
+        2）提供一系列：数据绑定，数字、日期格式化，xml、json的默认支持
+     -->
+    <mvc:annotation-driven>
+        <!-- 添加第三方json类型转换器 -->
+        <mvc:message-converters>
+            <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter"/>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+    <!-- 2.配置静态资源访问 -->
+    <mvc:default-servlet-handler/>
+    <!-- 3.配置视图解析器 -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+    <!-- 4.配置controller包扫描 -->
+    <context:component-scan base-package="com.mrjoke.seckill.web.controller"/>
+</beans>
