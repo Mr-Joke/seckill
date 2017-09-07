@@ -4,6 +4,7 @@ import com.mrjoke.seckill.dto.Exposer;
 import com.mrjoke.seckill.dto.SeckillExecution;
 import com.mrjoke.seckill.dto.SeckillResult;
 import com.mrjoke.seckill.entities.Seckill;
+import com.mrjoke.seckill.enums.SeckillStateEnum;
 import com.mrjoke.seckill.exception.RepeatSeckillException;
 import com.mrjoke.seckill.exception.SeckillCloseException;
 import com.mrjoke.seckill.service.SeckillService;
@@ -91,8 +92,12 @@ public class SeckillController {
         try {
             SeckillExecution seckillExecution = seckillService.executeSeckill(seckillId, killPhone, md5);
             return new SeckillResult<>(true,seckillExecution);
-        }catch (SeckillCloseException | RepeatSeckillException e1){
-            return new SeckillResult<>(true,e1.getMessage());
+        }catch (SeckillCloseException e1){
+            SeckillExecution seckillExecution = new SeckillExecution(seckillId, SeckillStateEnum.END);
+            return new SeckillResult<>(true,seckillExecution);
+        }catch (RepeatSeckillException e2){
+            SeckillExecution seckillExecution = new SeckillExecution(seckillId, SeckillStateEnum.REPEAT);
+            return new SeckillResult<>(true,seckillExecution);
         }catch (Exception e){
             logger.error(e.getMessage(),e);
             return new SeckillResult<>(false,e.getMessage());

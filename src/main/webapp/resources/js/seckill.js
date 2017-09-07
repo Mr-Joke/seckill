@@ -11,7 +11,7 @@ var seckill = {
             return '/seckill/'+ seckillId + '/exposer';
         },
         execution : function (seckillId,md5) {
-            return '/seckill/' + seckillId + '/' + md5 + 'execution';
+            return '/seckill/' + seckillId + '/' + md5 + '/execution';
         }
     },
     handlerSeckillkill : function (seckillId,node) {
@@ -27,7 +27,22 @@ var seckill = {
                     var md5 = exposer['md5'];
                     var killUrl = seckill.URL.execution(seckillId,md5);
                     //给按钮注册点击事件
-                    //TODO
+                    $('#killBtn').one('click',function () {
+                        //执行秒杀请求
+                        //1.先禁用按钮
+                        $(this).addClass('disabled');
+                        //2.发送秒杀请求
+                        $.post(killUrl,{},function (result) {
+                           if (result && result['success']){
+                               var killResult = result['data'];
+                               var state = killResult['state'];
+                               var stateInfo = killResult['stateInfo'];
+                               //3.显示秒杀结果
+                               node.html('<span class="label label-success">'+ stateInfo +'</span>')
+                           }
+                        });
+                    });
+                    node.show();
                 }else{
                     //未开启秒杀，由于pc机与服务器计时不一致
                     var now = exposer['now'];
