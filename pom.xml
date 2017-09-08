@@ -29,6 +29,9 @@
         <spring.version>4.3.8.RELEASE</spring.version>
         <!-- json依赖 -->
         <fastjson.version>1.2.0</fastjson.version>
+        <jedis-version>2.9.0</jedis-version>
+        <protostuff.version>1.0.12</protostuff.version>
+        <commons-collections.version>3.2.1</commons-collections.version>
     </properties>
     <dependencies>
         <!-- junit4依赖，支持注解方式 -->
@@ -133,6 +136,31 @@
             <artifactId>fastjson</artifactId>
             <version>${fastjson.version}</version>
         </dependency>
+        <!-- redis依赖 -->
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>${jedis-version}</version>
+        </dependency>
+        <!-- 开源第三方序列化工具 -->
+        <dependency>
+            <groupId>com.dyuproject.protostuff</groupId>
+            <artifactId>protostuff-core</artifactId>
+            <version>${protostuff.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.dyuproject.protostuff</groupId>
+            <artifactId>protostuff-runtime</artifactId>
+            <version>${protostuff.version}</version>
+        </dependency>
+        <!-- 集合工具 -->
+        <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+            <version>${commons-collections.version}</version>
+        </dependency>
+
+
     </dependencies>
     <build>
         <finalName>seckill</finalName>

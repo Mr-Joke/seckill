@@ -54,7 +54,7 @@ public class SeckillServiceTest {
 
     @Test
     public void exposeSeckillUrl() throws Exception {
-        int seckillId = 1000;
+        int seckillId = 1;
         Exposer exposer = seckillService.exposeSeckillUrl(seckillId);
         logger.info(exposer);
     }
@@ -97,7 +97,18 @@ public class SeckillServiceTest {
         }catch (Exception e){
             logger.error(e);
         }
+    }
 
+    @Test
+    public void seckillProcedure(){
+        int seckillId = 3;
+        String phone = "15844494187";
+        Exposer exposer = seckillService.exposeSeckillUrl(seckillId);
+        if (exposer.isExposed()){
+            String md5 = exposer.getMd5();
+            SeckillExecution seckillExecution = seckillService.executeSeckillProcedure(seckillId, phone, md5);
+            logger.info(seckillExecution.getStateInfo());
+        }
     }
 
 }

@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 public interface SeckillDao {
     /**
@@ -29,4 +30,10 @@ public interface SeckillDao {
      * @return 返回记录修改条数，为0则表示修改失败
      */
     int reduceQuantity(@Param("seckillId") int seckillId,@Param("killTime") Date killTime);
+
+    /**
+     * 使用存储过程执行秒杀
+     * @param map
+     */
+    void killByProcedure(Map<String, Object> map);
 }
