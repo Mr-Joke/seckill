@@ -90,15 +90,17 @@ public class SeckillController {
             return new SeckillResult<>(true,"未注册!!!");
         }
         try {
-            SeckillExecution seckillExecution = seckillService.executeSeckill(seckillId, killPhone, md5);
+//            SeckillExecution seckillExecution = seckillService.executeSeckill(seckillId, killPhone, md5);
+            //使用存储过程执行秒杀
+            SeckillExecution seckillExecution = seckillService.executeSeckillProcedure(seckillId,killPhone , md5);
             return new SeckillResult<>(true,seckillExecution);
-        }catch (SeckillCloseException e1){
+        }/*catch (SeckillCloseException e1){
             SeckillExecution seckillExecution = new SeckillExecution(seckillId, SeckillStateEnum.END);
             return new SeckillResult<>(true,seckillExecution);
         }catch (RepeatSeckillException e2){
             SeckillExecution seckillExecution = new SeckillExecution(seckillId, SeckillStateEnum.REPEAT);
             return new SeckillResult<>(true,seckillExecution);
-        }catch (Exception e){
+        }*/catch (Exception e){
             logger.error(e.getMessage(),e);
             return new SeckillResult<>(false,e.getMessage());
         }

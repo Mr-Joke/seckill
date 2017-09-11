@@ -170,7 +170,7 @@ public class SeckillServiceImpl implements SeckillService {
      * @return
      */
     @Override
-    public SeckillExecution executeSeckillProcedure(int seckillId, String userPhone, String md5){
+    public SeckillExecution executeSeckillProcedure(int seckillId, String userPhone, String md5)throws SeckillException{
         //校验MD5
         if (md5 == null || !md5.equals(getMD5(seckillId))){
             //数据被篡改
