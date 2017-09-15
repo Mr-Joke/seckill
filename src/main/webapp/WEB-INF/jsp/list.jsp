@@ -39,7 +39,7 @@
                             <fmt:formatDate value="${seckill.seckillCreateTime}" pattern="yyyy-MM-dd HH:mm:ss"/>
                         </td>
                         <td>
-                            <a href="/seckill/${seckill.seckillId}/details" class="btn btn-info"
+                            <a href="/seckill/seckill/${seckill.seckillId}/details" class="btn btn-info"
                                target="_blank">Link</a>
                         </td>
                     </tr>

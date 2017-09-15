@@ -30,13 +30,13 @@ CREATE PROCEDURE `seckill`.`execute_seckill`
       select row_count() into affect_count;
       IF (affect_count = 0) THEN
         ROLLBACK;
-        SET r_result = 0; -- 秒杀关闭
+        SET r_result = 1; -- 秒杀关闭
       ELSEIF (affect_count < 0) THEN
         ROLLBACK;
         SET r_result = -2; -- 系统异常
       ELSE
         COMMIT;
-        SET r_result = 1;
+        SET r_result = 0;
       END IF;
     END IF;
   END

@@ -58,7 +58,7 @@
 <script src="https://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 <%-- jQuery countdown 倒计时插件--%>
 <script src="https://cdn.bootcss.com/jquery.countdown/2.2.0/jquery.countdown.min.js"></script>
-<script src="/resources/js/seckill.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/seckill.js"></script>
 <script type="text/javascript">
     $(function () {
        seckill.detail.init({

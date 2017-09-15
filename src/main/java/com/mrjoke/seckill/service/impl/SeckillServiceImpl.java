@@ -186,7 +186,7 @@ public class SeckillServiceImpl implements SeckillService {
             //执行存储过程，result被赋值
             seckillDao.killByProcedure(map);
             Integer result = MapUtils.getInteger(map, "result", -2);
-            if (result == 1){
+            if (result == 0){
                 Record record = recordDao.selectByIdWithSeckill(seckillId, userPhone);
                 return new SeckillExecution(seckillId, SeckillStateEnum.SUCCESS,record);
             }else{
